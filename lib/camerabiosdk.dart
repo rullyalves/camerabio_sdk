@@ -10,7 +10,7 @@ class Camerabiosdk {
   Camerabiosdk(this.onResult) {
     _channel.setMethodCallHandler((call) async {
       if(onResult != null){
-        onResult(call.arguments)
+        onResult(call.arguments);
       }
     });
   }
