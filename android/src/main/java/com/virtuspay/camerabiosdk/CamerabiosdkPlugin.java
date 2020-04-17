@@ -3,17 +3,20 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.Nullable;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 
 
-public class CamerabiosdkPlugin implements FlutterPlugin,MethodChannel.MethodCallHandler {
+public class CamerabiosdkPlugin implements FlutterPlugin,MethodChannel.MethodCallHandler{
   private MethodChannel channel;
   private Context context;
 
   public static void registerWith(Registrar registrar) {
+
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "plugins.virtuspay/camerabio");
     final CamerabiosdkPlugin camerabiosdkPlugin = new CamerabiosdkPlugin();
     camerabiosdkPlugin.setContext(registrar.activity());
@@ -43,6 +46,7 @@ public class CamerabiosdkPlugin implements FlutterPlugin,MethodChannel.MethodCal
    channel = null;
    context = null;
   }
+
 }
 
 

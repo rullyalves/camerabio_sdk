@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class Camerabiosdk {
+  final Function(Map<String, dynamic> result) onResult;
   static const MethodChannel _channel =
       const MethodChannel('plugins.virtuspay/camerabio');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  Camerabiosdk(this.onResult) {
+    _channel.setMethodCallHandler((call) async {
+      if(onResult != null){
+        onResult(call.arguments)
+      }
+    });
   }
 }
