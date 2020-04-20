@@ -25,6 +25,7 @@ public class CamerabiosdkPlugin implements FlutterPlugin,MethodChannel.MethodCal
     Intent intent = new Intent(context,StartActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
+    result.success(null);
   }
 
   public void setContext(Context context) {
