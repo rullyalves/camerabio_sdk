@@ -4,6 +4,8 @@ import com.example.camerabioandroid.camerabiomanager.CameraBioManager;
 import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import org.w3c.dom.DocumentType;
@@ -45,37 +47,44 @@ public class StartActivity extends FlutterActivity implements CallbackCameraBio,
 
   @Override
   public void onSuccessCapture(final String base64) {
-    runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
-        final Map<String,Object> result = new HashMap<>();
-        result.put("image",base64);
+    new Handler(Looper.getMainLooper()).post(
+            new Runnable() {
+              @Override
+              public void run() {
+                final Map<String,Object> result = new HashMap<>();
+                result.put("image",base64);
 
-        Log.d("ONSUCCESS","CAPTURADO COM SUCESSO");
-        methodChannel.invokeMethod("algo",result);
+                Log.d("ONSUCCESS","CAPTURADO COM SUCESSO");
+                methodChannel.invokeMethod("algo",result);
 
-      }
-    });
+              }
+            }
+    );
+
+
 
   }
 
   @Override
   public void onSuccessCaptureDocument(final String base64) {
-  runOnUiThread(new Runnable() {
-    @Override
-    public void run() {
-      final Map<String,Object> result = new HashMap<>();
-      result.put("image",base64);
-      result.put("type","document");
-      Log.d("ONSUCCESSDOCUMENT","CAPTURADO COM SUCESSO");
-      methodChannel.invokeMethod("algo",result);
-    }
-  });
+    new Handler(Looper.getMainLooper()).post(
+            new Runnable() {
+              @Override
+              public void run() {
+                final Map<String,Object> result = new HashMap<>();
+                result.put("image",base64);
+                result.put("type","document");
+                Log.d("ONSUCCESSDOCUMENT","CAPTURADO COM SUCESSO");
+                methodChannel.invokeMethod("algo",result);
+              }
+            }
+
+    );
   }
 
   @Override
   public void onFailedCapture(String description) {
-    runOnUiThread(new Runnable() {
+    new Handler(Looper.getMainLooper()).post(new Runnable() {
       @Override
       public void run() {
 
