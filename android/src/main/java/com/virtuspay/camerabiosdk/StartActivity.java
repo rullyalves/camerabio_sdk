@@ -40,7 +40,7 @@ public class StartActivity extends FlutterActivity implements CallbackCameraBio,
  */
     CameraBioManager cb = new CameraBioManager(this);
     cb.startCamera();
-    cb.startCameraDocument(CameraBioManager.RG_FRENTE);
+   // cb.startCameraDocument(CameraBioManager.RG_FRENTE);
   }
 
   @Override
@@ -75,7 +75,15 @@ public class StartActivity extends FlutterActivity implements CallbackCameraBio,
 
   @Override
   public void onFailedCapture(String description) {
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
 
+        Log.d("ONERROR","CAPTURADO COM ERRO");
+        methodChannel.invokeMethod("algo","erro");
+
+      }
+    });
   }
 
   @Override
