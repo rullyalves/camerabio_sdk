@@ -26,9 +26,7 @@ public class StartActivity extends FlutterActivity implements CallbackCameraBio,
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     flutterEngine = new FlutterEngine(this);
-    methodChannel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(),"plugins.virtuspay/cam");
-   flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
-    FlutterEngineCache.getInstance().put("flutter_engine",flutterEngine);
+    methodChannel = new MethodChannel(getFlutterView().getDartExecutor().getBinaryMessenger(),"plugins.virtuspay/cam");
 
     methodChannel.setMethodCallHandler(this);
 
